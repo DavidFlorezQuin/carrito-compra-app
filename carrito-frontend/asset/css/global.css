@@ -1,0 +1,13 @@
+.form-group{
+    display: flex;
+    align-items: center;
+}
+
+.container{
+    margin-top: 3rem;
+}
+
+.header-filset{
+    display: flex;
+    margin-bottom: 10px;
+}
