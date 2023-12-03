@@ -6,10 +6,13 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Productos</title>
     <link rel='stylesheet' type='text/css' media='screen' href='../asset/css/global.css'>
-    <script src='../js/producto.js'></script>
+    <script src='../js/cliente.js'></script>
 
     <!-- Librerias -->
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/litera/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- ajax jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -17,68 +20,68 @@
         <div id="inputData">
             <form>
                 <fieldset>
-                    <section class="header-filset"><legend><strong>Cliente</strong></legend><button class="btn btn-success" name="btnAgregar" onclick="Agregar()">Agregar</button>
-                    </section>
-
+                    <legend>Cliente</legend>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Nombre</label>
+                        <div class="col-sm-10">
                             <input type="hidden" name="id" id="id" value="">
-                            <input type="text" class="form-control" name="nombre" id="nombre" value="" placeholder="Ingresar nombre">
+                            <input type="text" class="form-control" name="nombre" id="nombre" value=""
+                                placeholder="Ingresar nombre">
+                        </div>
 
                         <label class="col-sm-2 col-form-label">Correo</label>
+                        <div class="col-sm-10">
                             </br>
-                            <input type="email" class="form-control" name="correo" id="correo" value=""
-                                placeholder="Ingresar nombre">
-
-                        <label class="col-sm-2 col-form-label">Teléfono</label>
-                            </br>
-                            <input type="number" class="form-control" name="telefono" id="telefono" value=""
-                                placeholder="Ingresar telefono">
+                            <input type="text" class="form-control" name="correo" id="correo" value=""
+                                placeholder="Ingresar correo">
+                        </div>
 
                         <label class="col-sm-2 col-form-label">Dirección</label>
+                        <div class="col-sm-10">
                             </br>
-                            <input type="text" class="form-control" name="cantidad" id="cantidad" value=""
-                                placeholder="Ingresar dirección">
+                            <input type="text" class="form-control" name="direccion" id="direccion" value=""
+                                placeholder="Ingresar direccion">
+                        </div>
+
+                        <label class="col-sm-2 col-form-label">Teléfono</label>
+                        <div class="col-sm-10">
+                            </br>
+                            <input type="text" class="form-control" name="telefono" id="telefono" value=""
+                                placeholder="Ingresar telefono">
+                        </div>
 
                         <label class="col-sm-2 col-form-label">Estado</label>
+                        <div class="col-sm-10">
+                            </br>
                             <select class="form-select" id="estado">
                                 <option selected>--Seleccione--</option>
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
+                        </div>
                     </div>
                 </fieldset>
             </form>
         </div>
         <div id="buttonData">
             <br>
+            <button name="btnAgregar" onclick="save()" class="btn btn-success">Agregar</button>
         </div>
-        <div id="outputData">
-            
-            <!-- Aquí llegan los datos de la bd -->
+        <div id="outputData">           
         </br>
             <table class="table table-hover">
                 <thead>
-                    <tr class="table-dark text-center">
+                    <tr class="table-dark">
                         <th>Nombre</th>
-                        <th>Correo</th>
                         <th>Teléfono</th>
+                        <th>Correo</th>
                         <th>Dirección</th>
                         <th>Estado</th>
                         <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="text-center">
-                    <tr>
-                        <td>David Mauricio      </td>
-                        <td>davidmqg@gmail.com</td>
-                        <td>2345672</td>
-                        <td>Calle 45 </td>
-                        <td>Activo</td>
-                        <th><img src="../asset/icon/pencil-square.svg" alt=""></th>
-                        <th><img src="../asset/icon/trash3.svg" alt=""></th>
-                    </tr>
-                   
+                <tbody id="resultData">
+                     <!-- Aquí llegan los datos de la bd -->                    
                 </tbody>
             </table>
         </div>
@@ -86,3 +89,6 @@
 </body>
 
 </html>
+<script>
+   loadData();
+</script>

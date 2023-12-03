@@ -1,16 +1,16 @@
 function save() {
     // Construir el objeto data
     var data = {
-      'codigo': $('#codigo').val(),
       'nombre': $('#nombre').val(),
-      'precio': parseFloat($('#precio').val()),
-      'cantidad': parseInt($('#cantidad').val()),
+      'telefono': $('#telefono').val(),
+      'direccion': $('#direccion').val(),
+      'correo': $('#correo').val(),
       'estado': parseInt($('#estado').val()),
     };
   
     var jsonData = JSON.stringify(data);
     $.ajax({
-      url: 'http://localhost:9000/v1/api/producto',
+      url: 'http://localhost:9000/v1/api/cliente',
       method: 'POST',
       dataType: 'json',
       contentType: 'application/json',
@@ -29,16 +29,16 @@ function save() {
   function update() {
     // Construir el objeto data
     var data = {
-      'codigo': $('#codigo').val(),
       'nombre': $('#nombre').val(),
-      'precio': parseFloat($('#precio').val()),
-      'cantidad': parseInt($('#cantidad').val()),
+      'telefono': $('#telefono').val(),
+      'direccion': $('#direccion').val(),
+      'correo': $('#correo').val(),
       'estado': parseInt($('#estado').val()),
     };
     var id = $("#id").val();
     var jsonData = JSON.stringify(data);
     $.ajax({
-      url: 'http://localhost:9000/v1/api/producto/' +id,
+      url: 'http://localhost:9000/v1/api/cliente/' +id,
       data: jsonData,
       method: "PUT",
       headers: {
@@ -58,7 +58,7 @@ function save() {
   
   function loadData() {
     $.ajax({
-      url: 'http://localhost:9000/v1/api/producto',
+      url: 'http://localhost:9000/v1/api/cliente',
       method: 'GET',
       dataType: 'json',
       success: function (data) {
@@ -67,10 +67,10 @@ function save() {
         data.forEach(function (item) {
           // Construir el HTML para cada objeto
           html += `<tr>
-                  <td>`+ item.codigo + `</td>
                   <td>`+ item.nombre + `</td>
-                  <td>`+ item.precio + `</td>
-                  <td>`+ item.cantidad + `</td>
+                  <td>`+ item.correo + `</td>
+                  <td>`+ item.telefono + `</td>
+                  <td>`+ item.direccion + `</td>
                   <td>`+ (item.estado == true ? 'Activio' : 'Inactivo') + `</td>
                   <th><img src="../asset/icon/pencil-square.svg" alt="" onclick="findById(`+ item.id + `)"></th>
                   <th><img src="../asset/icon/trash3.svg" alt="" onclick="deleteById(`+ item.id + `)"></th>
@@ -88,15 +88,15 @@ function save() {
   
   function findById(id) {
     $.ajax({
-      url: 'http://localhost:9000/v1/api/producto/' + id,
+      url: 'http://localhost:9000/v1/api/cliente/' + id,
       method: 'GET',
       dataType: 'json',
       success: function (data) {
         $('#id').val(data.id);
-        $('#codigo').val(data.codigo);
         $('#nombre').val(data.nombre);
-        $('#precio').val(data.precio);
-        $('#cantidad').val(data.cantidad);
+        $('#correo').val(data.correo);
+        $('#telefono').val(data.telefono);
+        $('#direccion').val(data.direccion);
         $('#estado').val(data.estado == true ? 1 : 0);
   
         //Cambiar boton.
@@ -113,7 +113,7 @@ function save() {
   
   function deleteById(id) {
     $.ajax({
-      url: 'http://localhost:9000/v1/api/producto/' + id,
+      url: 'http://localhost:9000/v1/api/cliente/' + id,
       method: "delete",
       headers: {
         "Content-Type": "application/json"
@@ -127,10 +127,10 @@ function save() {
   
   function clearData() {
     $('#id').val('');
-    $('#codigo').val('');
     $('#nombre').val('');
-    $('#precio').val('');
-    $('#cantidad').val('');
+    $('#correo').val('');
+    $('#direccion').val('');
+    $('#telefono  ').val('');
     $('#estado').val('');
   }
   
