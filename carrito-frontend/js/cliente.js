@@ -1,3 +1,6 @@
+
+//ESTE MÉTODO ES PARA GUARDAR
+
 function save() {
     // Construir el objeto data
     var data = {
@@ -26,6 +29,8 @@ function save() {
     });
   }
   
+//ESTE MÉTODO ES PARA ACTUALIZAR
+
   function update() {
     // Construir el objeto data
     var data = {
@@ -55,6 +60,8 @@ function save() {
       btnAgregar.attr('onclick', 'save()');
     })
   }
+
+  //ESTE MÉTODO MUESTRA LOS DATOS EN LA TABLA
   
   function loadData() {
     $.ajax({
@@ -85,6 +92,8 @@ function save() {
       }
     });
   }
+
+  //ESTE MÉTODO LLENA LOS CAMPOS DE LOS REGISTROS SELECIONADOS
   
   function findById(id) {
     $.ajax({
@@ -110,6 +119,8 @@ function save() {
       }
     });
   }
+
+  //ESTE MÉTODO ES PARA ELIMINAR
   
   function deleteById(id) {
     $.ajax({
@@ -124,6 +135,8 @@ function save() {
       clearData();
     })
   }
+
+  //ESTE MÉTODO ES PARA LIMPIAR 
   
   function clearData() {
     $('#id').val('');
