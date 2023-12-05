@@ -1,23 +1,25 @@
-
 //ESTE MÉTODO ES PARA GUARDAR
 
 function save() {
   // Construir el objeto data
   var fechaActual = new Date().toISOString().split('T')[0];
-
+    
   var data = {
-    'codigo': $('#codigo').val(),
     'fecha': fechaActual,
-    'valorTotal':parseFloat($('#valor_total').val()),
-    'clienteId': {
-      'id' : parseInt($('#cliente').val())
+    'cantidad': parseInt($('#cantidad').val()),
+    'valorPagar':200,
+    'facturaId': {
+      'id' : parseInt($('#factura').val())
+    },
+    'productoId': {
+      'id' : parseInt($('#producto').val())
     },
     'estado': parseInt($('#estado').val()),
   };
 
   var jsonData = JSON.stringify(data);
   $.ajax({
-    url: 'http://localhost:9000/v1/api/factura',
+    url: 'http://localhost:9000/v1/api/DetalleFactura',
     method: 'POST',
     dataType: 'json',
     contentType: 'application/json',
@@ -68,7 +70,7 @@ function update() {
 //ESTE MÉTODO MUESTRA LOS DATOS EN LA TABLA
 function loadData() {
   $.ajax({
-    url: 'http://localhost:9000/v1/api/factura',
+    url: 'http://localhost:9000/v1/api/DetalleFactura',
     method: 'GET',
     dataType: 'json',
     success: function (data) {
@@ -77,11 +79,11 @@ function loadData() {
       data.forEach(function (item) {
         // Construir el HTML para cada objeto
         html += `<tr>
-                <td>`+ item.codigo + `</td>
-                <td>`+ item.fecha + `</td>
-                <td>`+ item.valorTotal + `</td>
-                <td>`+ item.clienteId.nombre + `</td>
-                <td>`+ (item.estado == true ? 'Activio' : 'Inactivo') + `</td>
+                <td>`+ item.facturaId.codigo + `</td>
+                <td>`+ item.productoId.nombre + `</td>
+                <td>`+ item.cantidad + `</td>
+                <td>`+ item.valorPagar + `</td>
+                <td>`+ (item.estado == true ? 'Activo' : 'Inactivo') + `</td>
                 <th><img src="../asset/icon/pencil-square.svg" alt="" onclick="findById(`+ item.id + `)"></th>
                 <th><img src="../asset/icon/trash3.svg" alt="" onclick="deleteById(`+ item.id + `)"></th>
             </tr>`;
@@ -96,13 +98,13 @@ function loadData() {
   });
 }
 //ESTE MÉTODO MUESTRA LOS DATOS DE CLIENTES
-function selectCliente() {
+function selectProducto() {
   $.ajax({
-    url: 'http://localhost:9000/v1/api/cliente',
+    url: 'http://localhost:9000/v1/api/producto',
     method: 'GET',
     dataType: 'json',
     success: function (data) {
-      var selectElement = $('#cliente');
+      var selectElement = $('#producto');
       selectElement.empty(); // Limpiar opciones anteriores, si las hay
 
       data.forEach(function (item) {
@@ -110,6 +112,29 @@ function selectCliente() {
         var option = $('<option>', {
           value: item.id,
           text: item.nombre
+        });
+        selectElement.append(option);
+      });
+    },
+    error: function (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  });
+}
+function selectFactura() {
+  $.ajax({
+    url: 'http://localhost:9000/v1/api/factura',
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      var selectElement = $('#factura');
+      selectElement.empty(); // Limpiar opciones anteriores, si las hay
+
+      data.forEach(function (item) {
+        // Agregar una opción por cada cliente
+        var option = $('<option>', {
+          value: item.id,
+          text: item.codigo
         });
         selectElement.append(option);
       });

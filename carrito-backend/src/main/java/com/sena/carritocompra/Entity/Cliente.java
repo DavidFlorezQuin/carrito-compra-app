@@ -65,5 +65,7 @@ public class Cliente extends ABaseEntity{
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}	
+	}
+
+
 }
